@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is the unit of resistance?",
+    "options": [
+      "Volt",
+      "Ohm",
+      "Ampere",
+      "Watt"
+    ],
+    "answer": "Ohm"
+  },
+  {
+    "question": "What is Ohm's Law?",
+    "options": [
+      "V = IR",
+      "P = VI",
+      "E = mc²",
+      "F = ma"
+    ],
+    "answer": "V = IR"
+  },
+  {
+    "question": "Which instrument measures current?",
+    "options": [
+      "Voltmeter",
+      "Ammeter",
+      "Wattmeter",
+      "Megger"
+    ],
+    "answer": "Ammeter"
+  }
+]

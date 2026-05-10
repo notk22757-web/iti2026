@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+<div class="container">
+
+<div id="adminLogin">
+  <h2>Admin Login</h2>
+  <input id="adminPassword" type="password" placeholder="Admin Password">
+  <button onclick="adminLogin()">Login</button>
+</div>
+
+<div id="adminPanel" style="display:none;">
+  <h2>Add Question</h2>
+  <textarea id="question" placeholder="Question"></textarea>
+  <input id="opt1" placeholder="Option 1">
+  <input id="opt2" placeholder="Option 2">
+  <input id="opt3" placeholder="Option 3">
+  <input id="opt4" placeholder="Option 4">
+  <input id="answer" placeholder="Correct Answer (must match one option)">
+  <button onclick="addQuestion()">Save Question</button>
+  <p><a href="results.html">📊 View All Results</a></p>
+
+  <hr>
+  <h2>📂 Upload Questions from JSON</h2>
+  <input type="file" id="jsonFile" accept=".json">
+  <button onclick="uploadQuestionsJSON()">Upload JSON</button>
+
+</div>
+
+<script>
+if (sessionStorage.getItem('isAdmin') === 'true') {
+  document.getElementById('adminLogin').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+}
+</script>
+
+</div>
+</body>
+</html>
