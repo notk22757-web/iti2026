@@ -113,7 +113,7 @@ async function loadResults() {
 }
 
 
-async function uploadQuestionsJSON() {
+async async function uploadQuestionsJSON() {
   const fileInput = document.getElementById('jsonFile');
   if (!fileInput || !fileInput.files.length) {
     alert('Please select a JSON file.');
@@ -128,17 +128,32 @@ async function uploadQuestionsJSON() {
       throw new Error('JSON must be an array of questions.');
     }
 
+    // Support both global db and window.db
+    const firestore = typeof db !== 'undefined' ? db : window.db;
+    if (!firestore) {
+      throw new Error('db is not defined. Check firebase-config.js');
+    }
+
     let count = 0;
     for (const q of questions) {
-      if (!q.question || !Array.isArray(q.options) || q.options.length < 2 || !q.answer) {
+      let options = q.options;
+
+      // Also support option1, option2, option3, option4 format
+      if (!Array.isArray(options)) {
+        options = [q.option1, q.option2, q.option3, q.option4].filter(Boolean);
+      }
+
+      if (!q.question || !Array.isArray(options) || options.length < 2 || !q.answer) {
         continue;
       }
-      await db.collection('questions').add({
+
+      await firestore.collection('questions').add({
         question: q.question,
-        options: q.options,
+        options: options,
         answer: q.answer,
-        subject: q.subject || ''
+        subject: q.subject || q.section || ''
       });
+
       count++;
     }
 
